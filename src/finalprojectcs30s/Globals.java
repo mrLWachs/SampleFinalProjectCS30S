@@ -4,7 +4,8 @@ package finalprojectcs30s;
 
  
 /**
- * Globals.java - description
+ * Globals.java - a class to store global variables available across all 
+ * classes in this project
  *
  * @author Mr. Wachs
  * @since 25-Jan-2022, 11:15:55 AM
@@ -12,12 +13,11 @@ package finalprojectcs30s;
 public class Globals 
 {
 
-    // makes a global varaible across all classes
-    // in this project and the word "static" 
-    // essentially means "shared"
+    // Makes a global varaible across all classes in this project and the word 
+    // "static" which essentially means "shared"
     public static User[] users = new User[100];
     
-    // track which spot in the array to add to
+    // Track which spot in the array to add to
     public static int index = 0;
     
 }

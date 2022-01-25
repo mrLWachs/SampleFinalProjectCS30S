@@ -1,5 +1,5 @@
 
-/** required package class namespace */
+/** Required package class namespace */
 package finalprojectcs30s;
 
  

@@ -3,7 +3,8 @@
 package finalprojectcs30s;
 
 /**
- * User.java - description
+ * LoginUI.java - the login in user interface (UI) - a frame (form) user 
+ * interface (UI) container created using the NetBeans Designer.
  *
  * @author Mr. Wachs
  * @since 25-Jan-2022, 11:11:49 AM
@@ -16,11 +17,19 @@ public class LoginUI extends javax.swing.JFrame {
     public LoginUI() {
         initComponents();
         
-        // code after the designer written call to the 
-        // method that builds the design
+        // Code after the designer written call to the method that builds 
+        // the design
         this.setVisible(true);
     }
 
+    //##########################################################################
+    // NOTE: the NetBeans visual designer adds the code below which can NOT be
+    // edited, it also adds other code like the constructor above which you can 
+    // edit, add to, delete etc. The "Generated code" below can be seen by 
+    // clicking the "plus sign +" to expand the code
+    //##########################################################################
+      
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,29 +121,39 @@ public class LoginUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //##########################################################################
+    // NOTE: the NetBeans visual designer when a JFrame form is added to a 
+    // project also adds a main method below for each JFrame form, but this 
+    // main method can be edited and removed. I have removed the main method  
+    // for this class
+    //##########################################################################
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Double clicking a button in the design mode, immediately jumps to 
+        // code written for you connected to that button...................
+                
+        // Create a new user, but first we need the name and password from the 
+        // text field objects (using one of the methods built into that object)
+        String name = jTextField1.getText();      
         
-        // create a new user
-        // need the name and password
-        String name = jTextField1.getText();        
-        // error check
+        // Error check to make sure they have filled out a name
         if (name == null || name.equals("")) {
-            Dialogs.output("Please enter a name");
-            // exit the method
+            
+            // Message the user    
+            Dialogs.output("Please enter a name");      
+            
+            // Exit the method right here
             return;
         }
         
-        // create a new user
-        // need the name and password
+        // Do this all over again with the password
         String password = jTextField2.getText();        
-        // error check
         if (password == null || password.equals("")) {
             Dialogs.output("Please enter a password");
-            // exit the method
             return;
         }
         
-        // get to here if I pass the error checks
+        // The code will get to here if I pass the above error checks....
         
         // build a user (object)
         User user = new User(name, password);
@@ -151,6 +170,12 @@ public class LoginUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
+    //##########################################################################
+    // NOTE: the NetBeans visual designer adds the code below for each 
+    // component (control, widget, property, global variable) which also 
+    // cannot be edited
+    //##########################################################################
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
