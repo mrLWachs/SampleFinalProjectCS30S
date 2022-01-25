@@ -1,12 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
+/** Required package class namespace */
 package finalprojectcs30s;
 
 /**
+ * User.java - description
  *
- * @author lawrence.wachs
+ * @author Mr. Wachs
+ * @since 25-Jan-2022, 11:11:49 AM
  */
 public class LoginUI extends javax.swing.JFrame {
 
