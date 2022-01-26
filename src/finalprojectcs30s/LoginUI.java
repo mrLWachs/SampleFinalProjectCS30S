@@ -279,7 +279,7 @@ public class LoginUI extends javax.swing.JFrame {
             }            
         }
         // After the loop, no user was found to be the same, so the user is 
-        // not inthe database (the array)
+        // not in the database (the array)
         return false;
     }
     
