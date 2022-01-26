@@ -34,5 +34,29 @@ public class User extends Person
     public String info() {
         return super.name;
     }
+
+    /**
+     * Checks the passed user with "this" user
+     * 
+     * @param user the user to check
+     * @return they are the same (true) or not (false)
+     */
+    public boolean isEqualTo(User user) {
+        // Check the names first by pulling each name from each instance and
+        // storing the values in temporary variables
+        String name1 = this.name;
+        String name2 = user.name;
+        // Use the built-in string method to see if 2 strings are equal and if
+        // they are not equal then the 2 users are not equal
+        if (name1.equals(name2) == false) return false;
+        
+        // Now check the passwords the same way
+        String password1 = this.password;
+        String password2 = user.password;
+        if (password1.equals(password2) == false) return false; 
+        
+        // Passes the checks of names and passwords so the 2 users are equal
+        return true;
+    }
     
 }

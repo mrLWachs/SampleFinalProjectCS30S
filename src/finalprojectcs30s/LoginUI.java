@@ -12,14 +12,16 @@ package finalprojectcs30s;
 public class LoginUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginUI
+     * Constructor method (written by designer) creates new form 
      */
     public LoginUI() {
         initComponents();
         
         // Code after the designer written call to the method that builds 
         // the design
-        this.setVisible(true);
+        this.setResizable(false);           // The frame (form) cannot be sized
+        this.setLocationRelativeTo(null);   // Center the frame on the screen
+        this.setVisible(true);              // display the frame to the user
     }
 
     //##########################################################################
@@ -63,8 +65,18 @@ public class LoginUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Delete Account");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Log In");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Registed Users:");
         jLabel3.setToolTipText("");
@@ -149,25 +161,82 @@ public class LoginUI extends javax.swing.JFrame {
         // Do this all over again with the password
         String password = jTextField2.getText();        
         if (password == null || password.equals("")) {
-            Dialogs.output("Please enter a password");
-            return;
+            Dialogs.output("Please enter a password");      // Message user
+            return;                                         // Leave method
+        }
+        
+        // Make sure the password is only numbers by incorperationg a method
+        // from the "Numbers" class we brought in from the class "Help" page
+        // on Mr. Wachs' website
+        if (Numbers.isInteger(password) == false) {
+            Dialogs.output("Password must be numbers only!");   // Message user
+            return;                                             // Leave method
         }
         
         // The code will get to here if I pass the above error checks....
         
-        // build a user (object)
+        // Build a user (object)
         User user = new User(name, password);
         
-        // add this to the array
+        // Add this to the array
         Globals.users[Globals.index] = user;
         
-        // move to the next index for next time
+        // Move to the next index for next time
         Globals.index++;
         
-        // add to the listbox
+        // Add to the listbox
         list1.add(user.info());
         
+        // Clear out the text boxes for the next time
+        jTextField1.setText("");
+        jTextField2.setText("");
+        
+        // Set the "focus" (the flashing cursor) to the textbox
+        jTextField1.requestFocus();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        // Get the index number from the listbox using a built-in listbox method
+        int index = list1.getSelectedIndex();        
+        
+        // Check to make sure they actually selected something in the listbox
+        if (index == -1) {
+            Dialogs.output("Please select a user!");    // Message user
+            return;                                     // Leave method
+        }
+        
+        // Use another built-in listbox method to remove it fromthe listbox
+        list1.remove(index);        
+        
+        // You cannot "remove" a spot an array without rebuilding the entire 
+        // array - so instead we will use a technique called "lazy deletion"        
+        // and set the array location to a "null" value
+        Globals.users[index] = null;        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Get the name and password from dialog inputs (again using the 
+        // Dialogs class we brought into this project from our Help page
+        String name     = Dialogs.input("Please enter user name");
+        String password = Dialogs.input("Please enter user password");
+        
+        // Now build a temporay user to check for
+        User user = new User(name, password);
+        
+        // Check if this user is in the database (the array) by calling a 
+        // custom method that we will write lower in this code
+        if (isInDatabase(user) == true) {
+            Dialogs.output("Log in successful!");
+            // Potentially, the code could move on to other parts of a final
+            // project right here!!!!
+        }
+        else {
+            Dialogs.output("User not in database!");
+        }        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     //##########################################################################
@@ -187,4 +256,31 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private java.awt.List list1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Checks if the passed user is in the array of all user who have 
+     * registered or not
+     * 
+     * @param user the user to check
+     * @return they are in the database (true) or they aren't (false)
+     */
+    private boolean isInDatabase(User user) {
+        // Loop through the array
+        for (int i = 0; i < Globals.users.length; i++) {
+            // Pull out a user from the array
+            User userInArray = Globals.users[i];            
+            // Make sure the user isn't a "null" spot in the array (so we can
+            // skip over empty array spots
+            if (userInArray != null) {
+                // Now call a method in the User class to compare 2 users
+                if (user.isEqualTo(userInArray) == true) {
+                    return true;                            // They are the same
+                }
+            }            
+        }
+        // After the loop, no user was found to be the same, so the user is 
+        // not inthe database (the array)
+        return false;
+    }
+    
 }
